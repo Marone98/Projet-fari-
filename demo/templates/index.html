@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulation Dashboard</title>
+</head>
+<body>
+    <h1>Tic-Tac-Toe Simulation</h1>
+
+    <button onclick="drawGrid()">Draw Grid</button>
+    <button onclick="playMove()">Play Move</button>
+
+    <p id="result"></p>
+
+    <script>
+        function drawGrid() {
+            fetch('/draw_grid', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({center:[0.15,0.15], size:[0.1]})
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("result").innerText = JSON.stringify(data);
+            });
+        }
+
+        function playMove() {
+            fetch('/play', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({image: "dummy"})
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("result").innerText = JSON.stringify(data);
+            });
+        }
+    </script>
+</body>
+</html>
